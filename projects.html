@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Proyek-proyek Okto Esra Sinaga — Web, Networking, Embedded">
+    <title>Projects | Okto Esra Sinaga</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/projects.css">
+</head>
+<body>
+
+    <!-- ══ NAVBAR ══ -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Okto<span>.</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html"    class="nav-item">Home</a></li>
+                <li><a href="about.html"    class="nav-item">About</a></li>
+                <li><a href="projects.html" class="nav-item active">Projects</a></li>
+                <li><a href="contact.html"  class="nav-item">Contact</a></li>
+            </ul>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ══ PROJECTS ══ -->
+    <section class="projects-section">
+        <div class="container">
+
+            <div class="section-header text-center reveal">
+                <span class="section-tag">Showcase</span>
+                <h2>Proyek yang Telah Selesai</h2>
+                <div class="divider"></div>
+            </div>
+
+            <!-- Filter Bar -->
+            <div class="filter-bar reveal">
+                <button class="filter-btn active" data-filter="all">Semua</button>
+                <button class="filter-btn" data-filter="web">Web</button>
+                <button class="filter-btn" data-filter="networking">Networking</button>
+                <button class="filter-btn" data-filter="embedded">Embedded</button>
+                <button class="filter-btn" data-filter="algoritma">Algoritma</button>
+            </div>
+
+            <!-- Cards Grid -->
+            <div class="projects-grid stagger">
+
+                <!-- Card 1 -->
+                <article class="project-card reveal" data-tags="web wordpress">
+                    <div class="project-img">
+                        <span class="project-number">01</span>
+                        <img
+                            src="assets/projects/project1.png"
+                            alt="Portal Informasi SMAN 1 Siborong-borong"
+                            onerror="this.src='https://placehold.co/600x400/F5F7FA/4A90E2?text=Web+Portal'">
+                    </div>
+                    <div class="project-content">
+                        <h3>Portal Informasi SMAN 1 Siborong-borong</h3>
+                        <p>Sistem manajemen informasi sekolah berbasis WordPress CMS dengan tata letak responsif. Dikembangkan menggunakan metodologi Agile dan didokumentasikan sebagai jurnal ilmiah.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">WordPress</span>
+                            <span class="tech-tag">CMS</span>
+                            <span class="tech-tag">Agile</span>
+                            <span class="tech-tag">CSS</span>
+                        </div>
+                        <a href="#" class="btn-view">View Project <span class="arrow">→</span></a>
+                    </div>
+                </article>
+
+                <!-- Card 2 -->
+                <article class="project-card reveal" data-tags="algoritma c-language">
+                    <div class="project-img">
+                        <span class="project-number">02</span>
+                        <img
+                            src="assets/projects/WhatsApp Image 2026-06-15 at 17.20.19.jpeg"
+                            alt="Simulasi ATM Multi-Akun"
+                            onerror="this.src='https://placehold.co/600x400/F5F7FA/636E72?text=ATM+CLI'">
+                    </div>
+                    <div class="project-content">
+                        <h3>Simulasi ATM Multi-Akun</h3>
+                        <p>Aplikasi Command Line Interface (CLI) perbankan yang mensimulasikan penyimpanan data akun multi-user serta alur transaksi yang aman menggunakan bahasa C.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">C Language</span>
+                            <span class="tech-tag">Algoritma</span>
+                            <span class="tech-tag">CLI</span>
+                        </div>
+                        <a href="#" class="btn-view">View Project <span class="arrow">→</span></a>
+                    </div>
+                </article>
+
+                <!-- Card 3 -->
+                <article class="project-card reveal" data-tags="embedded arduino">
+                    <div class="project-img">
+                        <span class="project-number">03</span>
+                        <img
+                            src="assets/projects/WhatsApp Image 2026-06-15 at 16.09.29.jpeg"
+                            alt="Alat Ukur Generator"
+                            onerror="this.src='https://placehold.co/600x400/F5F7FA/4A90E2?text=Embedded+System'">
+                    </div>
+                    <div class="project-content">
+                        <h3>Monitoring Tegangan Baterai & Suhu Lingkungan</h3>
+                        <p>Sistem embedded untuk mendeteksi Tegangan Baterai & Suhu Lingkungan Menggunakan Sensor Tegangan & Sensor DHT11 Berbasis Arduino Uno Dengan Aktuator LCD & Buzzer.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Arduino</span>
+                            <span class="tech-tag">C++</span>
+                            <span class="tech-tag">Sensor</span>
+                            <span class="tech-tag">Embedded</span>
+                        </div>
+                        <a href="#" class="btn-view">View Project <span class="arrow">→</span></a>
+                    </div>
+                </article>
+
+                <!-- Card 4 -->
+                <article class="project-card reveal" data-tags="web php">
+                    <div class="project-img">
+                        <span class="project-number">04</span>
+                        <img
+                            src="assets/projects/mysamosir.png"
+                            alt="MySamosir Tour Guide"
+                            onerror="this.src='https://placehold.co/600x400/F5F7FA/636E72?text=PHP+MVC'">
+                    </div>
+                    <div class="project-content">
+                        <h3>MySamosir Tour Guide</h3>
+                        <p>Pengembangan Platform Digital MySamosi untuk Pemesanan Pemandu Wisata Lokal di Pulau Samosir.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Figma</span>
+                            <span class="tech-tag">UI/UX Design</span>
+                        </div>
+                        <a href="#" class="btn-view">View Project <span class="arrow">→</span></a>
+                    </div>
+                </article>
+
+                <!-- Card 5 -->
+                <article class="project-card reveal" data-tags="networking linux">
+                    <div class="project-img">
+                        <span class="project-number">05</span>
+                        <img
+                            src="assets/projects/ansible_project_thumbnail.png"
+                            alt="Ansible Automation"
+                            onerror="this.src='https://placehold.co/600x400/F5F7FA/4A90E2?text=Networking'">
+                    </div>
+                    <div class="project-content">
+                        <h3>Ansible Automation: Infrastruktur Server Otomatis untuk DNS, Web, Mail & Load Balancer</h3>
+                        <p>Implementasi otomatisasi konfigurasi server Linux menggunakan Ansible untuk mengelola DNS Server (BIND9), 
+                            Web Server (Apache), Mail Server (Postfix & Dovecot), dan Load Balancer (HAProxy) pada domain flutter.local dan supabase.local.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Ansible</span>
+                            <span class="tech-tag">Postfix</span>
+                            <span class="tech-tag">DNS</span>
+                            <span class="tech-tag">HAProxy</span>
+                        </div>
+                        <a href="#" class="btn-view">View Project <span class="arrow">→</span></a>
+                    </div>
+                </article>
+
+                <!-- Card 6 -->
+                <article class="project-card reveal" data-tags="web">
+                    <div class="project-img">
+                        <span class="project-number">06</span>
+                        <img
+                            src="assets/projects/exam.png"
+                            alt="Exam.app Microservices"
+                            onerror="this.src='https://placehold.co/600x400/F5F7FA/636E72?text=Exam.app'">
+                    </div>
+                    <div class="project-content">
+                        <h3>ExamApp Distributed Microservices Examination Platform</h3>
+                        <p>Implementasi sistem ujian online terdistribusi menggunakan API Gateway, Microservices, RabbitMQ, dan Database Replication untuk meningkatkan skalabilitas dan ketersediaan layanan.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">JSON</span>
+                            <span class="tech-tag">React</span>
+                        </div>
+                        <a href="#" class="btn-view">View Project <span class="arrow">→</span></a>
+                    </div>
+                </article>
+
+                <!-- Card 7 -->
+                <article class="project-card reveal" data-tags="web wordpress">
+                    <div class="project-img">
+                        <span class="project-number">07</span>
+                        <img
+                            src="assets/projects/samosir island.png"
+                            alt="Samosir Island Website"
+                            onerror="this.src='https://placehold.co/600x400/F5F7FA/4A90E2?text=Samosir+Island'">
+                    </div>
+                    <div class="project-content">
+                        <h3>Samosir Island Website</h3>
+                        <p>Website pariwisata Pulau Samosir berbasis WordPress CMS, menampilkan destinasi wisata, budaya Batak, dan informasi perjalanan dengan desain visual menarik.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">WordPress</span>
+                            <span class="tech-tag">CMS</span>
+                            <span class="tech-tag">UI/UX</span>
+                        </div>
+                        <a href="#" class="btn-view">View Project <span class="arrow">→</span></a>
+                    </div>
+                </article>
+
+                <!-- Card 8 -->
+                <article class="project-card reveal" data-tags="web wordpress">
+                    <div class="project-img">
+                        <span class="project-number">08</span>
+                        <img
+                            src="assets/projects/Screenshot 2026-06-15 155050.png"
+                            alt="RS Putri Hijau Medan"
+                            onerror="this.src='https://placehold.co/600x400/F5F7FA/636E72?text=RS+Putri+Hijau'">
+                    </div>
+                    <div class="project-content">
+                        <h3>Website RS Putri Hijau Medan</h3>
+                        <p>Website informasi rumah sakit berbasis WordPress dengan fitur layanan, jadwal dokter, dan informasi fasilitas yang didesain dengan tampilan profesional dan bersih.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">WordPress</span>
+                            <span class="tech-tag">CMS</span>
+                            <span class="tech-tag">CSS</span>
+                        </div>
+                        <a href="#" class="btn-view">View Project <span class="arrow">→</span></a>
+                    </div>
+                </article>
+
+            </div><!-- /projects-grid -->
+        </div>
+    </section>
+
+    <!-- ══ FOOTER ══ -->
+    <footer>
+        <p>© 2025 <span>Okto Esra Sinaga</span>. Dibuat dengan ketelitian &amp; semangat belajar.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

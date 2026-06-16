@@ -1,0 +1,319 @@
+/* ============================================
+   ABOUT PAGE — about.css
+   ============================================ */
+
+.page-hero {
+    padding: calc(var(--nav-h) + 60px) 0 60px;
+    background: var(--bg-main);
+    text-align: center;
+}
+
+.page-hero h1 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -1px;
+    color: var(--text-dark);
+    margin: 8px 0 14px;
+}
+
+.page-hero p {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+/* ─── About Profile Section ─── */
+.about-profile {
+    padding: 80px 0;
+    background: var(--bg-main);
+}
+
+.about-container {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 72px;
+    align-items: start;
+}
+
+/* Image Side */
+.about-img-wrap {
+    position: relative;
+}
+
+.about-img-box {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--bg-soft);
+    aspect-ratio: 4/5;
+    position: relative;
+}
+
+.about-img-box img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s var(--ease);
+}
+
+.about-img-box:hover img { transform: scale(1.03); }
+
+/* Accent decorative shape */
+.about-img-wrap::after {
+    content: '';
+    position: absolute;
+    bottom: -16px;
+    right: -16px;
+    width: 120px;
+    height: 120px;
+    background: var(--bg-soft);
+    border-radius: var(--radius-md);
+    z-index: -1;
+}
+
+/* Info Side */
+.about-info .section-tag { margin-bottom: 8px; }
+
+.about-info h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+}
+
+.about-info .bio-text {
+    font-size: 1rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 14px;
+}
+
+/* Glass quote */
+.glass-box {
+    margin-top: 28px;
+    padding: 22px 26px;
+    background: rgba(74, 144, 226, 0.03);
+    border: 1px solid rgba(74, 144, 226, 0.15);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    backdrop-filter: blur(6px);
+}
+
+.glass-box h4 {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+}
+
+.glass-box p {
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--text-mid);
+    line-height: 1.7;
+}
+
+/* Quick Info Pills */
+.about-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 28px;
+}
+
+.pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: 40px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text-mid);
+    transition: all var(--transition);
+}
+
+.pill:hover {
+    background: var(--accent-light);
+    border-color: rgba(74,144,226,0.3);
+    color: var(--accent);
+}
+
+.pill-icon { font-size: 0.9rem; }
+
+/* ─── Timeline Section ─── */
+.timeline-section {
+    padding: 80px 0 100px;
+    background: var(--bg-soft);
+}
+
+.timeline-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+}
+
+.timeline-col-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 36px;
+}
+
+.timeline-col-header h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.timeline-col-icon {
+    width: 36px; height: 36px;
+    background: var(--accent-light);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+.timeline-wrapper {
+    position: relative;
+    padding-left: 28px;
+}
+
+.timeline-wrapper::before {
+    content: '';
+    position: absolute;
+    left: 5px; top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 40px;
+    padding: 20px 22px;
+    background: var(--bg-main);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    transition: all var(--transition);
+}
+
+.timeline-item:hover {
+    border-color: rgba(74,144,226,0.25);
+    box-shadow: var(--shadow-sm);
+    transform: translateX(4px);
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -22px; top: 22px;
+    width: 10px; height: 10px;
+    background: var(--accent);
+    border: 2px solid var(--bg-main);
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px rgba(74,144,226,0.15);
+}
+
+.time-period {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.timeline-item h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 4px;
+}
+
+.institution {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-mid);
+    margin-bottom: 10px;
+}
+
+.timeline-desc {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+}
+
+/* ─── Skills Bar Section ─── */
+.skills-detail-section {
+    padding: 80px 0 100px;
+    background: var(--bg-main);
+}
+
+.skills-detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.skill-bar-item {
+    padding: 20px 22px;
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    transition: all var(--transition);
+}
+
+.skill-bar-item:hover {
+    box-shadow: var(--shadow-sm);
+    border-color: var(--border-hover);
+}
+
+.skill-bar-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.skill-bar-label span:first-child {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.skill-percent {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.skill-track {
+    height: 5px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.skill-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), #6BAEE8);
+    border-radius: 3px;
+    width: 0;
+    transition: width 1.2s var(--ease);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 1024px) {
+    .about-container { grid-template-columns: 1fr; gap: 40px; }
+    .about-img-wrap { max-width: 320px; margin: 0 auto; }
+    .timeline-grid  { grid-template-columns: 1fr; gap: 40px; }
+    .skills-detail-grid { grid-template-columns: 1fr; }
+}

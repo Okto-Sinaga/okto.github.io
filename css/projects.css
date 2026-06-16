@@ -1,0 +1,210 @@
+/* ============================================
+   PROJECTS PAGE — projects.css
+   ============================================ */
+
+.projects-section {
+    padding: calc(var(--nav-h) + 64px) 0 100px;
+    background: var(--bg-main);
+}
+
+/* ─── Filter Bar ─── */
+.filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 52px;
+    justify-content: center;
+}
+
+.filter-btn {
+    padding: 8px 20px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    border-radius: 40px;
+    border: 1.5px solid var(--border);
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all var(--transition);
+    letter-spacing: 0.3px;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: var(--text-dark);
+    border-color: var(--text-dark);
+    color: #fff;
+}
+
+/* ─── Projects Grid ─── */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 28px;
+}
+
+/* ─── Project Card ─── */
+.project-card {
+    background: var(--bg-main);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: all 0.35s var(--ease);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 48px rgba(0,0,0,0.08);
+    border-color: rgba(74,144,226,0.25);
+}
+
+/* Image */
+.project-img {
+    position: relative;
+    width: 100%;
+    height: 216px;
+    overflow: hidden;
+    background: var(--bg-soft);
+}
+
+.project-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s var(--ease);
+}
+
+.project-card:hover .project-img img {
+    transform: scale(1.08);
+}
+
+/* Image overlay on hover */
+.project-img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(45,52,54,0);
+    transition: background 0.35s var(--ease);
+}
+
+.project-card:hover .project-img::after {
+    background: rgba(45,52,54,0.08);
+}
+
+/* Index number badge */
+.project-number {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    width: 32px; height: 32px;
+    background: rgba(255,255,255,0.92);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    z-index: 1;
+    backdrop-filter: blur(4px);
+    border: 1px solid var(--border);
+}
+
+/* Content */
+.project-content {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.project-content h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+    line-height: 1.35;
+}
+
+.project-content p {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 18px;
+    flex: 1;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+/* Tech Stack Tags */
+.tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-bottom: 22px;
+}
+
+.tech-tag {
+    font-size: 0.73rem;
+    font-weight: 600;
+    background: var(--bg-soft);
+    color: var(--text-mid);
+    padding: 4px 11px;
+    border-radius: 40px;
+    border: 1px solid var(--border);
+    transition: all var(--transition);
+    letter-spacing: 0.2px;
+}
+
+.project-card:hover .tech-tag {
+    background: var(--accent-light);
+    border-color: rgba(74,144,226,0.2);
+    color: var(--accent);
+}
+
+/* View Button */
+.btn-view {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    padding: 11px 0;
+    border-top: 1px solid var(--border);
+    transition: all var(--transition);
+    letter-spacing: 0.2px;
+}
+
+.btn-view .arrow {
+    display: inline-block;
+    transition: transform var(--transition);
+}
+
+.btn-view:hover {
+    color: var(--accent);
+}
+
+.btn-view:hover .arrow {
+    transform: translateX(5px);
+}
+
+/* ─── Empty State ─── */
+.no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 0;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 760px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+}
