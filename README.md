@@ -1,4 +1,4 @@
-# Hi there 👋, I'm Beliana Sinaga
+# Hi there 👋, I'm Okto Sinaga
 
 🎓 D3 Teknologi Komputer — Institut Teknologi Del, Laguboti, North Sumatra
 🌐 Focusing on Systems Programming, Networking, Web Development & Applied AI/ML
