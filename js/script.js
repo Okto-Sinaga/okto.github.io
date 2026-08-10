@@ -258,3 +258,577 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 });
+
+/* ============================================================
+   NEURAL NETWORK ANIMATION
+   ============================================================ */
+
+(function () {
+
+    const canvas = document.getElementById('neural-network');
+
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+
+    let width;
+    let height;
+
+    let particles = [];
+
+    let animationFrame;
+
+    const mouse = {
+        x: null,
+        y: null,
+        radius: 150
+    };
+
+
+    /* ========================================================
+       CONFIGURATION
+       ======================================================== */
+
+    const config = {
+
+        desktopParticles: 75,
+
+        mobileParticles: 40,
+
+        maxDistance: 145,
+
+        particleSpeed: 0.25,
+
+        particleSize: 1.5,
+
+        mouseDistance: 180
+
+    };
+
+
+    /* ========================================================
+       RESIZE
+       ======================================================== */
+
+    function resizeCanvas() {
+
+        const section =
+            canvas.parentElement;
+
+        width =
+            section.offsetWidth;
+
+        height =
+            section.offsetHeight;
+
+
+        const dpr =
+            Math.min(
+                window.devicePixelRatio || 1,
+                2
+            );
+
+
+        canvas.width =
+            width * dpr;
+
+        canvas.height =
+            height * dpr;
+
+
+        canvas.style.width =
+            width + 'px';
+
+        canvas.style.height =
+            height + 'px';
+
+
+        ctx.setTransform(
+            dpr,
+            0,
+            0,
+            dpr,
+            0,
+            0
+        );
+
+
+        createParticles();
+
+    }
+
+
+    /* ========================================================
+       PARTICLES
+       ======================================================== */
+
+    function createParticles() {
+
+        particles = [];
+
+
+        const isMobile =
+            window.innerWidth <= 768;
+
+
+        const particleCount =
+            isMobile
+                ? config.mobileParticles
+                : config.desktopParticles;
+
+
+        for (
+            let i = 0;
+            i < particleCount;
+            i++
+        ) {
+
+            particles.push({
+
+                x:
+                    Math.random() *
+                    width,
+
+                y:
+                    Math.random() *
+                    height,
+
+                vx:
+                    (
+                        Math.random() - 0.5
+                    ) *
+                    config.particleSpeed,
+
+                vy:
+                    (
+                        Math.random() - 0.5
+                    ) *
+                    config.particleSpeed,
+
+                radius:
+                    Math.random() *
+                    1.5 +
+                    0.7,
+
+                pulse:
+                    Math.random() *
+                    Math.PI *
+                    2
+
+            });
+
+        }
+
+    }
+
+
+    /* ========================================================
+       DRAW PARTICLES
+       ======================================================== */
+
+    function drawParticles() {
+
+        particles.forEach(
+            particle => {
+
+                particle.pulse += 0.015;
+
+
+                const glow =
+                    (
+                        Math.sin(
+                            particle.pulse
+                        ) + 1
+                    ) / 2;
+
+
+                const radius =
+                    particle.radius +
+                    glow * 0.8;
+
+
+                /* Glow */
+
+                ctx.beginPath();
+
+                ctx.arc(
+                    particle.x,
+                    particle.y,
+                    radius * 4,
+                    0,
+                    Math.PI * 2
+                );
+
+
+                const gradient =
+                    ctx.createRadialGradient(
+                        particle.x,
+                        particle.y,
+                        0,
+                        particle.x,
+                        particle.y,
+                        radius * 4
+                    );
+
+
+                gradient.addColorStop(
+                    0,
+                    'rgba(37, 99, 235, 0.45)'
+                );
+
+
+                gradient.addColorStop(
+                    1,
+                    'rgba(37, 99, 235, 0)'
+                );
+
+
+                ctx.fillStyle =
+                    gradient;
+
+                ctx.fill();
+
+
+                /* Core */
+
+                ctx.beginPath();
+
+                ctx.arc(
+                    particle.x,
+                    particle.y,
+                    radius,
+                    0,
+                    Math.PI * 2
+                );
+
+
+                ctx.fillStyle =
+                    'rgba(37, 99, 235, 0.85)';
+
+                ctx.fill();
+
+            }
+        );
+
+    }
+
+
+    /* ========================================================
+       DRAW CONNECTIONS
+       ======================================================== */
+
+    function drawConnections() {
+
+        for (
+            let i = 0;
+            i < particles.length;
+            i++
+        ) {
+
+            for (
+                let j = i + 1;
+                j < particles.length;
+                j++
+            ) {
+
+                const p1 =
+                    particles[i];
+
+                const p2 =
+                    particles[j];
+
+
+                const dx =
+                    p1.x - p2.x;
+
+                const dy =
+                    p1.y - p2.y;
+
+
+                const distance =
+                    Math.sqrt(
+                        dx * dx +
+                        dy * dy
+                    );
+
+
+                if (
+                    distance <
+                    config.maxDistance
+                ) {
+
+                    const opacity =
+                        (
+                            1 -
+                            distance /
+                            config.maxDistance
+                        ) *
+                        0.20;
+
+
+                    ctx.beginPath();
+
+
+                    ctx.moveTo(
+                        p1.x,
+                        p1.y
+                    );
+
+
+                    ctx.lineTo(
+                        p2.x,
+                        p2.y
+                    );
+
+
+                    ctx.strokeStyle =
+                        `rgba(
+                            37,
+                            99,
+                            235,
+                            ${opacity * 1.8}
+                        )`;
+
+
+                    ctx.lineWidth = 0.9;
+
+
+                    ctx.stroke();
+
+                }
+
+            }
+
+        }
+
+    }
+
+
+    /* ========================================================
+       MOUSE CONNECTION
+       ======================================================== */
+
+    function drawMouseConnections() {
+
+        if (
+            mouse.x === null ||
+            mouse.y === null
+        ) {
+            return;
+        }
+
+
+        particles.forEach(
+            particle => {
+
+                const dx =
+                    particle.x -
+                    mouse.x;
+
+                const dy =
+                    particle.y -
+                    mouse.y;
+
+
+                const distance =
+                    Math.sqrt(
+                        dx * dx +
+                        dy * dy
+                    );
+
+
+                if (
+                    distance <
+                    mouse.radius
+                ) {
+
+                    const opacity =
+                        (
+                            1 -
+                            distance /
+                            mouse.radius
+                        ) *
+                        0.35;
+
+
+                    ctx.beginPath();
+
+
+                    ctx.moveTo(
+                        particle.x,
+                        particle.y
+                    );
+
+
+                    ctx.lineTo(
+                        mouse.x,
+                        mouse.y
+                    );
+
+
+                    ctx.strokeStyle =
+                        `rgba(
+                            59,
+                            130,
+                            246,
+                            ${opacity}
+                        )`;
+
+
+                    ctx.lineWidth = 0.8;
+
+
+                    ctx.stroke();
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* ========================================================
+       UPDATE
+       ======================================================== */
+
+    function updateParticles() {
+
+        particles.forEach(
+            particle => {
+
+                particle.x +=
+                    particle.vx;
+
+                particle.y +=
+                    particle.vy;
+
+
+                /* Horizontal wrap */
+
+                if (
+                    particle.x < -20
+                ) {
+                    particle.x =
+                        width + 20;
+                }
+
+
+                if (
+                    particle.x >
+                    width + 20
+                ) {
+                    particle.x = -20;
+                }
+
+
+                /* Vertical wrap */
+
+                if (
+                    particle.y < -20
+                ) {
+                    particle.y =
+                        height + 20;
+                }
+
+
+                if (
+                    particle.y >
+                    height + 20
+                ) {
+                    particle.y = -20;
+                }
+
+            }
+        );
+
+    }
+
+
+    /* ========================================================
+       ANIMATION LOOP
+       ======================================================== */
+
+    function animate() {
+
+        ctx.clearRect(
+            0,
+            0,
+            width,
+            height
+        );
+
+
+        drawConnections();
+
+        drawMouseConnections();
+
+        drawParticles();
+
+        updateParticles();
+
+
+        animationFrame =
+            requestAnimationFrame(
+                animate
+            );
+
+    }
+
+
+    /* ========================================================
+       MOUSE
+       ======================================================== */
+
+    const section =
+        canvas.parentElement;
+
+
+    section.addEventListener(
+        'mousemove',
+        function (event) {
+
+            const rect =
+                section.getBoundingClientRect();
+
+
+            mouse.x =
+                event.clientX -
+                rect.left;
+
+            mouse.y =
+                event.clientY -
+                rect.top;
+
+        }
+    );
+
+
+    section.addEventListener(
+        'mouseleave',
+        function () {
+
+            mouse.x = null;
+
+            mouse.y = null;
+
+        }
+    );
+
+
+    /* ========================================================
+       INITIALIZE
+       ======================================================== */
+
+    window.addEventListener(
+        'resize',
+        resizeCanvas
+    );
+
+
+    resizeCanvas();
+
+    animate();
+
+
+})();
