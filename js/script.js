@@ -257,6 +257,49 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    /* ══════════════════════════════════════════
+       8. CERTIFICATE LIGHTBOX / MODAL
+    ══════════════════════════════════════════ */
+    const modal = document.getElementById('certificateModal');
+    const modalImg = document.getElementById('certificateImg');
+    const closeBtn = document.querySelector('.certificate-close');
+    const lightboxImages = document.querySelectorAll('[data-lightbox]');
+
+    if (lightboxImages.length && modal) {
+        // Open modal on image click
+        lightboxImages.forEach(img => {
+            img.addEventListener('click', function() {
+                modal.classList.add('show');
+                modalImg.src = this.src;
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        // Close modal
+        function closeModal() {
+            modal.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', closeModal);
+        }
+
+        // Close when clicking outside the image
+        modal.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && modal.classList.contains('show')) {
+                closeModal();
+            }
+        });
+    }
+
 });
 
 /* ============================================================
