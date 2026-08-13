@@ -3,24 +3,136 @@
    ============================================ */
 
 .page-hero {
-    padding: calc(var(--nav-h) + 60px) 0 60px;
-    background: var(--bg-main);
+    position: relative;
+    padding: calc(var(--nav-h) + 40px) 0 40px;
+    background: linear-gradient(135deg, var(--bg-main) 0%, rgba(74, 144, 226, 0.03) 50%, var(--bg-main) 100%);
     text-align: center;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+/* Decorative background shapes */
+.page-hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.hero-shape {
+    position: absolute;
+    opacity: 0.05;
+    animation: float 20s ease-in-out infinite;
+}
+
+.hero-shape-1 {
+    width: 300px;
+    height: 300px;
+    background: var(--accent);
+    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+    top: -100px;
+    left: -50px;
+    animation-delay: 0s;
+}
+
+.hero-shape-2 {
+    width: 250px;
+    height: 250px;
+    background: var(--accent);
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    top: 50%;
+    right: -80px;
+    animation-delay: 2s;
+}
+
+.hero-shape-3 {
+    width: 200px;
+    height: 200px;
+    background: var(--accent);
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    bottom: 20px;
+    left: 10%;
+    animation-delay: 4s;
+}
+
+.hero-shape-4 {
+    width: 180px;
+    height: 180px;
+    background: var(--accent);
+    border-radius: 50% 50% 40% 60% / 40% 70% 50% 50%;
+    top: 200px;
+    right: 10%;
+    animation-delay: 1s;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-30px) rotate(5deg); }
+}
+
+.page-hero-content {
+    position: relative;
+    z-index: 1;
 }
 
 .page-hero h1 {
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 700;
-    letter-spacing: -1px;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -1.5px;
     color: var(--text-dark);
-    margin: 8px 0 14px;
+    margin: 14px 0 18px;
+    background: linear-gradient(135deg, var(--text-dark) 0%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .page-hero p {
-    font-size: 1.05rem;
+    font-size: clamp(1rem, 2vw, 1.15rem);
     color: var(--text-muted);
-    max-width: 480px;
-    margin: 0 auto;
+    max-width: 540px;
+    margin: 0 auto 28px;
+    line-height: 1.6;
+}
+
+/* Scroll down indicator */
+.hero-cta-group {
+    display: flex;
+    justify-content: center;
+    margin-top: 32px;
+}
+
+.btn-scroll {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    color: var(--accent);
+    transition: all 0.4s var(--ease);
+    animation: pulse-down 2.5s ease-in-out infinite;
+}
+
+.btn-scroll:hover {
+    background: var(--accent);
+    color: #fff;
+    transform: translateY(8px);
+}
+
+.btn-scroll svg {
+    width: 20px;
+    height: 20px;
+}
+
+@keyframes pulse-down {
+    0%, 100% { transform: translateY(0); opacity: 1; }
+    50% { transform: translateY(12px); opacity: 0.5; }
 }
 
 /* ─── About Profile Section ─── */
