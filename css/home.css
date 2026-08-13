@@ -378,14 +378,14 @@
 
 .skill-logo-item {
     position: relative;
-    width: 100px;
-    min-height: 108px;
-    padding: 14px 8px 12px;
+    width: 80px;
+    min-height: 85px;
+    padding: 10px 6px 8px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 9px;
+    gap: 6px;
     border-radius: 18px;
     background:
         rgba(255, 255, 255, 0.055);
@@ -413,8 +413,8 @@
    ============================================================ */
 
 .skills-row-1 .skill-logo-item {
-    width: 125px;
-    min-height: 125px;
+    width: 100px;
+    min-height: 100px;
     border-radius: 22px;
     background:
         rgba(255, 255, 255, 0.075);
@@ -455,12 +455,12 @@
    ============================================================ */
 
 .skill-logo-item i {
-    width: 54px;
-    height: 54px;
+    width: 42px;
+    height: 42px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 54px;
+    font-size: 42px;
     line-height: 1;
     transition:
         transform 0.35s ease,
@@ -470,9 +470,9 @@
 /* WordPress larger */
 .skills-row-1
 .skill-logo-item i {
-    width: 65px;
-    height: 65px;
-    font-size: 65px;
+    width: 50px;
+    height: 50px;
+    font-size: 50px;
 }
 
 /* ============================================================
