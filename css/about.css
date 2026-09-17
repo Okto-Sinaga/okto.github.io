@@ -354,6 +354,23 @@
     transform: scale(1.05);
 }
 
+.timeline-photo.education-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+}
+
+.timeline-photo.education-logo img {
+    height: 220px;
+    padding: 16px;
+    object-fit: contain;
+}
+
+.timeline-photo.education-logo img:hover {
+    transform: scale(1.02);
+}
+
 .timeline-item:hover {
     border-color: rgba(74,144,226,0.25);
     box-shadow: var(--shadow-sm);
@@ -399,6 +416,74 @@
     font-size: 0.88rem;
     color: var(--text-muted);
     line-height: 1.65;
+}
+
+/* ─── Education Cards (logo + info, horizontal) ─── */
+.edu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.edu-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px;
+    background: var(--bg-main);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition);
+}
+
+.edu-card:hover {
+    border-color: rgba(74,144,226,0.3);
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-2px);
+}
+
+.edu-logo {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    background: var(--bg-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.edu-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 6px;
+}
+
+.edu-info h4 {
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 3px;
+    line-height: 1.3;
+}
+
+.edu-sub {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+
+.edu-period {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+@media (max-width: 560px) {
+    .edu-grid { grid-template-columns: 1fr; }
 }
 
 /* ─── Skills Bar Section ─── */

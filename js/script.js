@@ -258,6 +258,41 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* ══════════════════════════════════════════
+       11. SCROLL SPY — navbar anchor (#home, #about,
+       #projects, #contact) mengikuti section yang lagi
+       kelihatan saat halaman di-scroll. Hanya aktif
+       kalau navbar-nya pakai link anchor (href="#...").
+    ══════════════════════════════════════════ */
+    const anchorLinks = document.querySelectorAll('.nav-item[href^="#"]');
+
+    if (anchorLinks.length) {
+        const spySections = Array.from(anchorLinks)
+            .map(link => document.querySelector(link.getAttribute('href')))
+            .filter(Boolean);
+
+        const setActiveAnchor = () => {
+            const offset = (navbar ? navbar.offsetHeight : 72) + 24;
+            let currentId = spySections[0] ? spySections[0].id : null;
+
+            spySections.forEach(section => {
+                if (section.getBoundingClientRect().top - offset <= 0) {
+                    currentId = section.id;
+                }
+            });
+
+            anchorLinks.forEach(link => {
+                link.classList.toggle(
+                    'active',
+                    link.getAttribute('href') === '#' + currentId
+                );
+            });
+        };
+
+        window.addEventListener('scroll', setActiveAnchor, { passive: true });
+        setActiveAnchor();
+    }
+
+    /* ══════════════════════════════════════════
        8. CERTIFICATE LIGHTBOX / MODAL
     ══════════════════════════════════════════ */
     const modal = document.getElementById('certificateModal');
@@ -299,6 +334,213 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    /* ══════════════════════════════════════════
+       12. LANGUAGE TOGGLE
+    ══════════════════════════════════════════ */
+    const languageButton = document.createElement('button');
+    const socialNav = document.querySelector('.nav-social');
+    const savedLanguage = localStorage.getItem('portfolio-language') || 'id';
+
+    languageButton.type = 'button';
+    languageButton.className = 'language-toggle';
+    languageButton.setAttribute('aria-label', 'Ganti bahasa');
+    languageButton.title = 'Ganti bahasa';
+
+    if (socialNav) {
+        socialNav.appendChild(languageButton);
+    }
+
+    const languagePairs = [
+        { selector: '.nav-links li:nth-child(1) .nav-item', en: 'Home', id: 'Beranda' },
+        { selector: '.nav-links li:nth-child(2) .nav-item', en: 'About', id: 'Tentang' },
+        { selector: '.nav-links li:nth-child(3) .nav-item', en: 'Projects', id: 'Proyek' },
+        { selector: '.nav-links li:nth-child(4) .nav-item', en: 'Contact', id: 'Kontak' },
+        { selector: '.profession', en: 'Computer Technology Student & Web Developer', id: 'Mahasiswa Teknologi Komputer & Web Developer' },
+        { selector: '.hero-buttons .btn-primary', en: '↓ Download CV', id: '↓ Unduh CV' },
+        { selector: '.hero-buttons .btn-secondary', en: 'View Projects →', id: 'Lihat Proyek →' },
+        { selector: '.timeline-col-header h3', en: ['Education', 'Experience'], id: ['Pendidikan', 'Pengalaman'] },
+        { selector: '.timeline-section .section-header h2', en: 'Education & Experience', id: 'Pendidikan & Pengalaman' },
+        { selector: '.projects-section .section-header h2', en: 'Completed Projects', id: 'Proyek yang Telah Selesai' },
+        { selector: '.contact-section .section-header h2', en: "Let's Work Together", id: 'Mari Mulai Kerja Sama' },
+        { selector: '.filter-btn[data-filter="all"]', en: 'All', id: 'Semua' },
+        { selector: '.filter-btn[data-filter="algoritma"]', en: 'Algorithms', id: 'Algoritma' },
+        { selector: '.btn-view', en: 'View Project →', id: 'Lihat Proyek →' },
+        { selector: '.form-title', en: 'Send Message', id: 'Kirim Pesan' },
+        { selector: '.social-title', en: 'Find Me On', id: 'Temukan Saya Di' },
+        { selector: 'label[for="name"]', en: 'Full Name', id: 'Nama Lengkap' },
+        { selector: 'label[for="subject"]', en: 'Subject', id: 'Subjek' },
+        { selector: 'label[for="message"]', en: 'Message', id: 'Pesan' }
+    ];
+
+    const sectionTranslations = {
+        index: [
+            ['Profil', 'Profile'],
+            ['Perjalanan', 'Journey'],
+            ['KEAHLIAN UTAMA', 'CORE SKILLS'],
+            ['Showcase', 'Showcase'],
+            ['Sertifikat', 'Certificates'],
+            ['Hubungi Saya', 'Contact Me']
+        ],
+        about: [['Profil', 'Profile'], ['Perjalanan', 'Journey']],
+        projects: [['Showcase', 'Showcase']],
+        contact: [['Hubungi Saya', 'Contact Me']]
+    };
+
+    const fullContentTranslations = [
+        { selector: '.description', id: 'Membangun solusi digital yang fungsional, bersih, dan bermakna dengan pendekatan minimalis serta performa yang optimal.', en: 'Building functional, clean, and meaningful digital solutions with a minimalist approach and optimal performance.' },
+        { selector: '.bio-text', id: [
+            'I am a Computer Technology student with a background in computer networking, hardware, operating systems, and website development. Throughout my studies, I have developed a strong interest in software development, web development, and UI/UX design. Although these areas fall outside my primary field of study, I continue to explore and hone my skills in them.',
+            'Currently, I am expanding my capabilities by combining the technical knowledge gained from Computer Technology with my passion for software development and digital design. I view this intersection as an opportunity to keep learning, experimenting, and creating digital solutions that are both functional and user-centric.'
+        ], en: [
+            'I am a Computer Technology student with a background in computer networking, hardware, operating systems, and website development. Throughout my studies, I have developed a strong interest in software development, web development, and UI/UX design. Although these areas fall outside my primary field of study, I continue to explore and hone my skills in them.',
+            'Currently, I am expanding my capabilities by combining the technical knowledge gained from Computer Technology with my passion for software development and digital design. I view this intersection as an opportunity to keep learning, experimenting, and creating digital solutions that are both functional and user-centric.'
+        ] },
+        { selector: '.glass-box p', id: '"Kesederhanaan adalah kecanggihan tertinggi. Fokus pada fungsionalitas murni tanpa mengorbankan estetika."', en: '"Simplicity is the ultimate sophistication. Focus on pure functionality without sacrificing aesthetics."' },
+        { selector: '.edu-sub', id: ['D3 Teknologi Komputer', 'Jurusan MIPA'], en: ['Computer Technology Diploma', 'Science and Mathematics'], },
+        { selector: '.edu-period', id: ['2024 – 2027 | Belum Selesai', '2024 | Selesai'], en: ['2024 – 2027 | In Progress', '2024 | Completed'] },
+        { selector: '.time-period', id: ['Mei 2026', 'AGUST 2025 — MEI 2026', 'AGUST 2025', '2025'], en: ['May 2026', 'AUG 2025 — MAY 2026', 'AUG 2025', '2025'] },
+        { selector: '.timeline-item h4', id: ['Peserta AI Bootcamp', 'Leader & Mentor Mahasiswa Baru', 'Divisi Events, PCA IT Del 2025', 'Web Developer — Proyek Akademik'], en: ['AI Bootcamp Participant', 'New Student Leader & Mentor', 'Events Division, PCA IT Del 2025', 'Web Developer — Academic Project'] },
+        { selector: '.institution', id: ['AI Bootcamp — On Site', 'Institut Teknologi Del', 'Institut Teknologi Del', 'Studi Kasus SMAN 1 Siborong-borong'], en: ['AI Bootcamp — On Site', 'Institut Teknologi Del', 'Institut Teknologi Del', 'SMAN 1 Siborong-borong Case Study'] },
+        { selector: '.timeline-desc', id: [
+            'Mengikuti pelatihan intensif seputar kecerdasan buatan, machine learning, dan pemrosesan bahasa alami. Memahami bagaimana kode dan data dapat dianalisis secara interaktif, terstruktur, dan mudah didokumentasikan dalam satu workspace menggunakan jupyterlab',
+            'Membimbing mahasiswa baru angkatan 2025. Memastikan adaptasi lingkungan kampus, membimbing akademik, etika kampus, dan fasilitas IT Del.',
+            'Mengelola perencanaan dan pelaksanaan rangkaian kegiatan penerimaan mahasiswa baru, koordinasi antar divisi, yang diarahkan Koordinator.',
+            'Mengembangkan portal informasi berbasis Website Informasi menggunakan WordPress dengan dokumentasi pengembangan menggunakan metodologi Agile. Dipresentasikan sebagai jurnal ilmiah akademik.'
+        ], en: [
+            'Participated in intensive training on artificial intelligence, machine learning, and natural language processing. Learned how code and data can be analyzed interactively, structurally, and documented easily in one workspace using JupyterLab.',
+            'Mentored the 2025 freshman cohort, supporting their campus adaptation, academic guidance, campus ethics, and understanding of IT Del facilities.',
+            'Managed the planning and execution of new student admission activities and coordinated multiple divisions under the coordinator\'s direction.',
+            'Developed an information portal using WordPress and documented the development with the Agile methodology. Presented as an academic scientific journal.'
+        ] },
+        { selector: '.project-card p', id: [
+            'Sistem manajemen informasi sekolah berbasis WordPress CMS dengan tata letak responsif. Dikembangkan menggunakan metodologi Agile dan didokumentasikan sebagai jurnal ilmiah.',
+            'Aplikasi Command Line Interface (CLI) perbankan yang mensimulasikan penyimpanan data akun multi-user serta alur transaksi yang aman menggunakan bahasa C.',
+            'Sistem embedded untuk mendeteksi Tegangan Baterai & Suhu Lingkungan Menggunakan Sensor Tegangan & Sensor DHT11 Berbasis Arduino Uno Dengan Aktuator LCD & Buzzer.',
+            'Pengembangan Platform Digital MySamosi untuk Pemesanan Pemandu Wisata Lokal di Pulau Samosir.',
+            'Implementasi otomatisasi konfigurasi server Linux menggunakan Ansible untuk mengelola DNS Server (BIND9), Web Server (Apache), Mail Server (Postfix & Dovecot), dan Load Balancer (HAProxy) pada domain flutter.local dan supabase.local.',
+            'Implementasi sistem ujian online terdistribusi menggunakan API Gateway, Microservices, RabbitMQ, dan Database Replication untuk meningkatkan skalabilitas dan ketersediaan layanan.',
+            'Website pariwisata Pulau Samosir berbasis WordPress CMS, menampilkan destinasi wisata, budaya Batak, dan informasi perjalanan dengan desain visual menarik.',
+            'Website informasi rumah sakit berbasis WordPress dengan fitur layanan, jadwal dokter, dan informasi fasilitas yang didesain dengan tampilan profesional dan bersih.'
+        ], en: [
+            'A WordPress CMS-based school information management system with a responsive layout. Developed using the Agile methodology and documented as a scientific journal.',
+            'A banking Command Line Interface (CLI) application that simulates multi-user account storage and secure transaction flows using C.',
+            'An embedded system for detecting battery voltage and environmental temperature using voltage and DHT11 sensors with an Arduino Uno, LCD, and buzzer actuators.',
+            'Development of the MySamosir digital platform for booking local tour guides on Samosir Island.',
+            'Automated Linux server configuration using Ansible to manage DNS, web, mail, and load balancer servers on the flutter.local and supabase.local domains.',
+            'A distributed online examination system using an API Gateway, microservices, RabbitMQ, and database replication to improve scalability and service availability.',
+            'A WordPress-based tourism website for Samosir Island featuring destinations, Batak culture, and travel information with an engaging visual design.',
+            'A professional and clean WordPress hospital information website featuring services, doctor schedules, and facility information.'
+        ] },
+        { selector: '.project-card h3', id: [
+            'Portal Informasi SMAN 1 Siborong-borong',
+            'Simulasi ATM Multi-Akun',
+            'Monitoring Tegangan Baterai & Suhu Lingkungan',
+            'MySamosir Tour Guide',
+            'Ansible Automation: Infrastruktur Server Otomatis untuk DNS, Web, Mail & Load Balancer',
+            'ExamApp Distributed Microservices Examination Platform',
+            'Samosir Island Website',
+            'Website RS Putri Hijau Medan'
+        ], en: [
+            'SMAN 1 Siborong-borong Information Portal',
+            'Multi-Account ATM Simulation',
+            'Battery Voltage & Environmental Temperature Monitoring',
+            'MySamosir Tour Guide',
+            'Ansible Automation: Automated Server Infrastructure for DNS, Web, Mail & Load Balancer',
+            'ExamApp Distributed Microservices Examination Platform',
+            'Samosir Island Website',
+            'Putri Hijau Medan Hospital Website'
+        ] },
+        { selector: '.certificate-card p', id: [
+            'Sertifikat penghargaan atas pemahaman mendalam tentang artificial intelligence,bahasa pemograman Python, memahami bagaimana kode dan data dapat dianalisis secara interaktif, terstruktur, dan mudah didokumentasikan dalam satu workspace menggunakan jupyterlab',
+            'Memperoleh sertifikat Web Design Competition 2026 sebagai bentuk apresiasi atas partisipasi dan kemampuan saya dalam mengembangkan desain website yang kreatif, inovatif dan sesuai kebutuhan pengguna',
+            'Berhasil menyelesaikan program **Self-Paced Azure AI Basic Fundamental** yang diselenggarakan oleh Microsoft, ElevAIte, dan GreatNusa',
+            'Berhasil menyelesaikan kursus Management Information System yang diselenggarakan oleh GreatNusa berkolaborasi dengan BINUS University.',
+            'Menyelesaikan pelatihan dan ujian HCIA-Datacom V1.0 Course yang diselenggarakan oleh Huawei ICT Academy, sebagai bentuk pengembangan kompetensi saya di bidang jaringan dan teknologi informasi',
+            'Menyelesaikan pelatihan dan ujian HCIA-Storage V5.0 Course yang diselenggarakan oleh Huawei ICT Academy, sebagai bentuk pengembangan kompetensi saya di bidang jaringan dan teknologi informasi',
+            'Mengikuti Webinar Automation: UiPath x IOH, yang memberikan wawasan mengenai penerapan automation dan Robotic Process Automation (RPA) dalam meningkatkan efisiensi serta produktivitas di dunia kerja',
+            'Menyelesaikan pelatihan Data Analytics Essentials melalui Cisco Networking Academy yang membekali saya dengan pemahaman dasar mengenai analisis data',
+            'Berhasil menyelesaikan dan memperoleh Sertifikasi Google Analytics, yang membuktikan pemahaman dan kemampuan saya dalam menggunakan Google Analytics untuk menganalisis data serta memahami performa dan perilaku pengguna',
+            'Membekali saya dengan pemahaman dan keterampilan dalam memanfaatkan platform Creatio untuk mendukung strategi serta aktivitas pemasaran.',
+            'Pengembangan Skill dalam industri teknologi dan menambah pengalaman untuk berkontribusi dalam perkembangan Artificial Intelligence.'
+        ], en: [
+            'A certificate recognizing an in-depth understanding of artificial intelligence and Python programming, including how code and data can be analyzed interactively, structurally, and documented in one workspace using JupyterLab.',
+            'Received the Web Design Competition 2026 certificate in recognition of participation and ability to develop creative, innovative, and user-focused website designs.',
+            'Successfully completed the Self-Paced Azure AI Basic Fundamental program organized by Microsoft, ElevAIte, and GreatNusa.',
+            'Successfully completed the Management Information System course organized by GreatNusa in collaboration with BINUS University.',
+            'Completed the HCIA-Datacom V1.0 training and examination organized by Huawei ICT Academy to develop networking and information technology competencies.',
+            'Completed the HCIA-Storage V5.0 training and examination organized by Huawei ICT Academy to develop networking and information technology competencies.',
+            'Attended the UiPath x IOH Automation Webinar, gaining insight into Robotic Process Automation (RPA) and improving workplace efficiency and productivity.',
+            'Completed Data Analytics Essentials training through Cisco Networking Academy, gaining a foundation in data analysis.',
+            'Successfully completed Google Analytics certification, demonstrating the ability to analyze data and understand user performance and behavior.',
+            'Developed an understanding and skills in using the Creatio platform to support marketing strategies and activities.',
+            'Developed skills in the technology industry and gained experience to contribute to the growth of Artificial Intelligence.'
+        ] },
+        { selector: '.detail-label', id: ['Email', 'Phone / WhatsApp', 'Lokasi', 'Institusi'], en: ['Email', 'Phone / WhatsApp', 'Location', 'Institution'] },
+        { selector: '.btn-submit span:first-child', id: 'Kirim Pesan', en: 'Send Message' },
+        { selector: '#name', attr: 'placeholder', id: 'Nama Anda', en: 'Your Name' },
+        { selector: '#subject', attr: 'placeholder', id: 'Topik pesan Anda', en: 'Message subject' },
+        { selector: '#message', attr: 'placeholder', id: 'Tuliskan pesan, pertanyaan, atau tawaran proyek Anda di sini...', en: 'Write your message, question, or project proposal here...' },
+        { selector: '.form-success h3', id: 'Pesan Terkirim!', en: 'Message Sent!' },
+        { selector: '.form-success p', id: 'Terima kasih telah menghubungi saya. Saya akan membalas secepatnya.', en: 'Thank you for contacting me. I will reply as soon as possible.' },
+        { selector: 'footer p', id: '© 2025 Okto Esra Sinaga. Dibuat dengan ketelitian & semangat belajar.', en: '© 2025 Okto Esra Sinaga. Made with care and a passion for learning.' }
+    ];
+
+    const pageName = (window.location.pathname.split('/').pop() || 'index.html').split('.')[0];
+    const setLanguage = language => {
+        languagePairs.forEach(pair => {
+            document.querySelectorAll(pair.selector).forEach(element => {
+                const translation = pair[language];
+                const index = Array.from(document.querySelectorAll(pair.selector)).indexOf(element);
+                element.textContent = Array.isArray(translation) ? translation[index] : translation;
+            });
+        });
+
+        (sectionTranslations[pageName] || []).forEach((pair, index) => {
+            const sectionTag = document.querySelectorAll('.section-tag')[index];
+            if (sectionTag) sectionTag.textContent = pair[language === 'id' ? 0 : 1];
+        });
+
+        fullContentTranslations.forEach(pair => {
+            document.querySelectorAll(pair.selector).forEach((element, index) => {
+                const value = pair[language];
+                const translated = Array.isArray(value) ? value[index] : value;
+                if (translated === undefined) return;
+                if (pair.attr) {
+                    element.setAttribute(pair.attr, translated);
+                } else {
+                    element.textContent = translated;
+                }
+            });
+        });
+
+        const pillLabels = language === 'id'
+            ? [' Medan, North Sumatra', ' D3 Teknologi Komputer', ' Institut Teknologi Del']
+            : [' Medan, North Sumatra', ' Computer Technology Diploma', ' Institut Teknologi Del'];
+        document.querySelectorAll('.pill').forEach((pill, index) => {
+            const textNode = Array.from(pill.childNodes).find(node => node.nodeType === Node.TEXT_NODE);
+            if (textNode && pillLabels[index]) textNode.textContent = pillLabels[index];
+        });
+
+        const footer = document.querySelector('footer p');
+        if (footer) {
+            footer.innerHTML = language === 'id'
+                ? '© 2025 <span>Okto Esra Sinaga</span>. Dibuat dengan ketelitian &amp; semangat belajar.'
+                : '© 2025 <span>Okto Esra Sinaga</span>. Made with care and a passion for learning.';
+        }
+
+        document.documentElement.lang = language;
+        languageButton.textContent = language === 'id' ? 'EN' : 'ID';
+        languageButton.title = language === 'id' ? 'Switch to English' : 'Ganti ke Bahasa Indonesia';
+        languageButton.setAttribute('aria-label', languageButton.title);
+    };
+
+    setLanguage(savedLanguage);
+    languageButton.addEventListener('click', () => {
+        const nextLanguage = (localStorage.getItem('portfolio-language') || 'id') === 'id' ? 'en' : 'id';
+        localStorage.setItem('portfolio-language', nextLanguage);
+        setLanguage(nextLanguage);
+    });
 
 });
 
