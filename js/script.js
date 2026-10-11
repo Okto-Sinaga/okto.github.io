@@ -390,8 +390,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const fullContentTranslations = [
         { selector: '.description', id: 'Membangun solusi digital yang fungsional, bersih, dan bermakna dengan pendekatan minimalis serta performa yang optimal.', en: 'Building functional, clean, and meaningful digital solutions with a minimalist approach and optimal performance.' },
         { selector: '.bio-text', id: [
-            'I am a Computer Technology student with a background in computer networking, hardware, operating systems, and website development. Throughout my studies, I have developed a strong interest in software development, web development, and UI/UX design. Although these areas fall outside my primary field of study, I continue to explore and hone my skills in them.',
-            'Currently, I am expanding my capabilities by combining the technical knowledge gained from Computer Technology with my passion for software development and digital design. I view this intersection as an opportunity to keep learning, experimenting, and creating digital solutions that are both functional and user-centric.'
+            'Saya adalah mahasiswa Teknologi Komputer dengan latar belakang di bidang jaringan komputer, perangkat keras, sistem operasi, dan pengembangan situs web. Selama masa studi, saya menaruh minat besar pada pengembangan perangkat lunak, pengembangan web, dan desain UI/UX. Meskipun bidang-bidang tersebut berada di luar fokus utama studi saya, saya terus mendalami dan mengasah keterampilan saya di bidang-bidang tersebut.',
+            'Saat ini, saya sedang mengembangkan kemampuan dengan memadukan pengetahuan teknis di bidang Teknologi Komputer serta minat saya terhadap pengembangan perangkat lunak dan desain digital. Saya memandang perpaduan ini sebagai peluang untuk terus belajar, bereksperimen, dan menciptakan solusi digital yang fungsional sekaligus berorientasi pada pengguna.'
         ], en: [
             'I am a Computer Technology student with a background in computer networking, hardware, operating systems, and website development. Throughout my studies, I have developed a strong interest in software development, web development, and UI/UX design. Although these areas fall outside my primary field of study, I continue to explore and hone my skills in them.',
             'Currently, I am expanding my capabilities by combining the technical knowledge gained from Computer Technology with my passion for software development and digital design. I view this intersection as an opportunity to keep learning, experimenting, and creating digital solutions that are both functional and user-centric.'
@@ -515,7 +515,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         const pillLabels = language === 'id'
-            ? [' Medan, North Sumatra', ' D3 Teknologi Komputer', ' Institut Teknologi Del']
+            ? [' Medan, Sumatera Utara', ' D3 Teknologi Komputer', ' Institut Teknologi Del']
             : [' Medan, North Sumatra', ' Computer Technology Diploma', ' Institut Teknologi Del'];
         document.querySelectorAll('.pill').forEach((pill, index) => {
             const textNode = Array.from(pill.childNodes).find(node => node.nodeType === Node.TEXT_NODE);
